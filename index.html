@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aramco Work Permit Receiver Practice Test</title>
+    <!-- CUSTOM FAVICON EMBEDDED -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='10' fill='%23006241'/%3E%3Cpolygon points='85,10 88,18 97,18 90,23 92,31 85,26 78,31 80,23 73,18 82,18' fill='%23FFFFFF'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006241;
+            --primary-light: #008A5B;
+            --primary-dark: #004A31;
+            --secondary-color: #0073e6;
+            --secondary-light: #1a8cff;
+            --secondary-dark: #005bb5;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-heavy: 0 8px 32px rgba(0,0,0,0.2);
+            --border-radius: 12px;
+            --border-radius-small: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-heavy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header img {
+            max-width: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(var(--shadow-light));
+            transition: var(--transition);
+        }
+
+        .header img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        .info {
+            background: linear-gradient(135deg, var(--light-gray), #ffffff);
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+        }
+
+        .info p {
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: var(--text-secondary);
+        }
+
+        .info strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius-small);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        #progress-indicator {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius-small);
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .question-container {
+            min-height: 300px;
+            background: #ffffff;
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .question p {
+            font-weight: 600;
+            font-size: 1.4em;
+            margin-top: 0;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+            margin: 25px 0 0 0;
+        }
+
+        .options li {
+            margin-bottom: 15px;
+            padding: 18px 20px;
+            border-radius: var(--border-radius-small);
+            border: 2px solid var(--medium-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            background: #ffffff;
+            font-size: 1.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .options li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--secondary-color), var(--secondary-light));
+            transition: var(--transition);
+            opacity: 0.1;
+        }
+
+        .options li:hover {
+            border-color: var(--secondary-color);
+            transform: translateX(5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .options li:hover::before {
+            width: 100%;
+        }
+
+        .options li.selected {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, #e7f3ff, #f0f8ff);
+            color: var(--secondary-dark);
+            font-weight: 500;
+            transform: translateX(5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .options li.selected::before {
+            width: 100%;
+        }
+
+        #navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, var(--secondary-color), var(--secondary-light));
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(135deg, var(--dark-gray), #5a6268);
+        }
+
+        .btn.success {
+            background: linear-gradient(135deg, var(--success-color), #34ce57);
+        }
+
+        .btn:disabled {
+            background: var(--medium-gray);
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        #results-container {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--medium-gray);
+            box-shadow: var(--shadow-medium);
+        }
+
+        #results-container h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .score {
+            font-size: 4em;
+            font-weight: 800;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: scoreAnimation 0.8s ease-out;
+        }
+
+        @keyframes scoreAnimation {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pass {
+            color: var(--success-color);
+            background: linear-gradient(135deg, var(--success-color), #34ce57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fail {
+            color: var(--danger-color);
+            background: linear-gradient(135deg, var(--danger-color), #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .review-container {
+            margin-top: 40px;
+        }
+
+        .review-question {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--medium-gray);
+            background: #ffffff;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .review-question:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .review-question p {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .review-options li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 12px;
+            border-radius: var(--border-radius-small);
+            padding: 12px 12px 12px 40px;
+        }
+
+        .review-options li::before {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .correct-answer {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .incorrect-answer {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .correct-answer::before {
+            content: '✓';
+            color: var(--success-color);
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid var(--success-color);
+        }
+
+        .incorrect-answer.user-selected::before {
+            content: '✗';
+            color: var(--danger-color);
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid var(--danger-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--medium-gray);
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        #reset-progress {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-small);
+        }
+
+        #reset-progress:hover {
+            background: var(--light-gray);
+            color: var(--secondary-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .question p {
+                font-size: 1.2em;
+            }
+
+            .options li {
+                padding: 15px;
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            #navigation-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .score {
+                font-size: 3em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .score {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Smooth transitions for all interactive elements */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container fade-in" id="main-container">
+    <div class="header">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjEwIiBmaWxsPSIjMDA2MjQxIi8+PHBvbHlnb24gcG9pbnRzPSI4NSwxMCA4OCwxOCA5NywxOCA5MCwyMyA5MiwzMSA4NSwyNiA3OCwzMSA4MCwyMyA3MywxOCA4MiwxOCIgZmlsbD0iI0ZGRkZGRiIvPjwvc3ZnPg==" alt="Saudi Aramco Logo">
+        <h1>Work Permit Receiver</h1>
+        <div class="subtitle">Practice Test</div>
+        <div style="font-size: 1.3em; font-weight: 700; color: var(--secondary-color); margin-top: 15px; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">YOU CAN YOU WILL</div>
+    </div>
+
+    <div id="start-container">
+        <div class="info">
+            <h3 style="color: var(--primary-color); margin-top: 0;">📋 Test Overview</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">50</span>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">80%</span>
+                    <div class="stat-label">Passing Score</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">597</span>
+                    <div class="stat-label">Total Questions Available</div>
+                </div>
+            </div>
+            <p>📚 This practice test presents <strong>50 multiple-choice questions</strong> one at a time from our comprehensive question bank.</p>
+            <p>💾 Your progress is automatically saved to avoid repeating questions until you've mastered them all.</p>
+            <p>🎯 Achieve <strong>80% or higher</strong> to pass the assessment.</p>
+        </div>
+
+        <button id="start-btn" class="btn success">🚀 Start Practice Test</button>
+    </div>
+
+    <div id="test-container" class="hidden">
+        <div id="progress-indicator"></div>
+        <div id="question-container" class="question-container"></div>
+        <div id="navigation-controls">
+            <button id="prev-btn" class="btn secondary">← Previous</button>
+            <button id="next-btn" class="btn">Next →</button>
+        </div>
+        <button id="submit-btn" class="btn success hidden">📊 Submit Test</button>
+    </div>
+
+    <div id="results-container" class="hidden"></div>
+    <div id="review-container" class="hidden"></div>
+
+    <footer>
+        <p>🔧 This is an unofficial practice tool based on the Saudi Aramco Work Permit System handbook.</p>
+        <button id="reset-progress">🔄 Reset Progress and Clear History</button>
+    </footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const questionBank = [
+        // Comprehensive 600-question bank with tougher intermediate-level options
+        
+        { q: "The safe execution of job site activities can ONLY be achieved by which party according to the work permit system?", a: 1, o: ["The certified work permit issuer with proper authority", "Those directly responsible for work preparation and supervision", "The designated safety representative assigned to the project", "The proponent organization's division head or above"] },
+        
+        { q: "The work permit system applies to specific activities in restricted areas AND to which other category of work?", a: 0, o: ["Restricted activities designated by proponent organization managers", "All maintenance work regardless of location or risk level", "Any work performed by external contractors on SA property", "Emergency response activities during operational incidents"] },
+        { q: "Which statement BEST defines restricted areas under the work permit system?", a: 2, o: ["Areas requiring special security clearance due to sensitive operations", "Zones where only Saudi Aramco employees are permitted to work", "Areas where hydrocarbons, flammable liquids/gases, or toxic agents are handled in bulk", "Locations designated as high-value asset zones requiring additional oversight"] },
+        { q: "Low-risk activities in restricted areas may be exempted from work permit requirements under what condition?", a: 1, o: ["When approved by the facility safety manager", "As determined by the proponent organization management", "If the work duration is less than 4 hours", "When performed by SA employees with 5+ years experience"] },
+        { q: "A Work Permit Issuer must be certified by whom to have the authority to issue permits?", a: 3, o: ["The facility operations manager", "The safety department supervisor", "The contractor's designated representative", "Their division or department head"] },
+        { q: "If a Work Permit Issuer also serves as the gas tester, what additional certification must they maintain?", a: 1, o: ["A confined space entry supervisor certificate", "A valid gas testing certificate", "An emergency response coordinator license", "A hazardous materials handling permit"] },
+        { q: "What is the FIRST responsibility listed for Work Permit Issuers in the system requirements?", a: 0, o: ["Maintain possession of a valid SA work permit issuer certificate", "Verify receiver's certificate validity for the specific work type", "Ensure gas monitoring equipment has proper calibration", "Conduct joint site inspection with the designated receiver"] },
+        { q: "Work Permit Issuers must verify that gas monitoring equipment has which specific validation?", a: 2, o: ["Current manufacturer warranty and service agreement", "Proper insurance coverage and operator training certification", "Valid calibration-due-date sticker or system memory date with correct sensors", "Recent inspection by SA Safety Department with documented approval"] },
+        { q: "During joint site inspections, issuers must ensure completion of which mandatory document?", a: 1, o: ["The Emergency Response Action Plan", "The Hazard Analysis Checklist", "The Equipment Isolation Verification Form", "The Personal Protective Equipment Assessment"] },
+        { q: "When hazards in the Hazard Analysis Checklist are answered 'NO', what action must the issuer take?", a: 3, o: ["Immediately cancel the permit and stop all work activities", "Document the hazard and proceed with enhanced monitoring", "Notify the division head and await further instructions", "Analyze hazards and develop adequate control methods before proceeding"] },
+        { q: "How frequently must a Work Permit Issuer monitor active job sites?", a: 2, o: ["At least once per shift during active work periods", "According to the specific schedule outlined in the permit", "Frequently to ensure permit conditions and SA safety requirements", "Hourly during high-risk activities, daily for routine work"] },
+        { q: "Under what circumstances must an issuer immediately cancel active permits?", a: 0, o: ["When work activities or site conditions change creating additional hazards", "If the receiver requests permit modification for any reason", "When weather conditions deteriorate beyond acceptable parameters", "If equipment malfunctions occur during the work activities"] },
+        { q: "Who has the authority to cancel ALL active permits within an emergency-affected area?", a: 1, o: ["The senior work permit issuer on duty", "The Incident Commander specified for the emergency", "The facility operations manager or designated representative", "The Saudi Aramco safety department supervisor"] },
+        { q: "Can Designated Representatives issue work permits independently?", a: 2, o: ["Yes, when authorized by their department head", "Yes, but only for cold work activities", "No, they cannot issue work permits", "Yes, during emergency situations only"] },
+        { q: "If a Designated Representative conducts gas tests, what certificate must they maintain?", a: 0, o: ["A valid gas testing certificate", "A confined space entry authorization", "A hazardous atmosphere monitoring license", "An emergency response certification"] },
+        { q: "What action must a Designated Representative take if job sites don't meet permit conditions?", a: 3, o: ["Issue a corrective action notice to the work crew", "Document the deficiency and continue monitoring", "Modify the permit conditions to match site realities", "Stop work immediately and inform the work permit issuer"] },
+        { q: "Work Permit Receivers can be SA employees OR which other category of personnel?", a: 1, o: ["Government regulatory inspectors with proper credentials", "Contractor employees sponsored by SA organization heads", "Certified safety consultants approved by the division", "Emergency response personnel during incident operations"] },
+        { q: "What is the FIRST responsibility listed for Work Permit Receivers?", a: 2, o: ["Receive proper permits from certified issuers before work", "Participate in joint site inspections with issuers", "Maintain possession of a valid SA work permit receiver certificate", "Perform work according to agreed-upon permit conditions"] },
+        { q: "Where must receivers keep their signed work permits during job execution?", a: 1, o: ["In the facility's main office for inspection access", "In their possession or in view at the job site", "With the work crew supervisor for reference", "Filed with the safety department for documentation"] },
+        { q: "If a receiver must leave the immediate work area, what option is available?", a: 3, o: ["Work must stop until the receiver returns", "The permit automatically transfers to the crew supervisor", "A verbal handover to any experienced crew member", "Transfer to another SA-certified receiver agreed upon in advance"] },
+        { q: "When must receivers immediately stop work and inform the issuer?", a: 0, o: ["When changes occur in work activities or site conditions", "If equipment delivery is delayed beyond scheduled times", "When crew members request additional break periods", "If weather conditions become uncomfortable but not dangerous"] },
+        { q: "How many main types of work permits are specified in the system?", a: 1, o: ["Three primary categories", "Four main types", "Five standard classifications", "Six distinct permit types"] },
+        { q: "Which work permit types are specifically listed in the system? (Select the complete list)", a: 2, o: ["Cold Work, Hot Work, Excavation, Electrical", "Hot Work, Cold Work, Line Break, Confined Space", "Cold Work, Hot Work, Equipment Opening/Line Break, Confined Space Entry", "Maintenance, Construction, Inspection, Emergency Response"] },
+        { q: "Can multiple permit types be required for a single job?", a: 0, o: ["Yes, some jobs may require more than one permit type", "No, only one permit type per job is allowed", "Only if approved by division head or above", "Yes, but only for emergency response situations"] },
+        { q: "Who determines the correct permit type(s) required for specific work?", a: 3, o: ["The work permit receiver based on job analysis", "The safety department after hazard assessment", "The proponent organization manager", "The work permit issuer"] },
+        { q: "Which section of the Work Permit Form covers 'Work Description'?", a: 0, o: ["Section 1", "Section 2", "Section 3", "Section 4"] },
+        { q: "In Section 1 'Work Description', what specific location information must be identified?", a: 2, o: ["General facility area and approximate work zone", "Building complex and floor level where work occurs", "Exact work location such as equipment or building number", "GPS coordinates and detailed site mapping references"] },
+        { q: "Which section addresses 'Hazard Identification & Control'?", a: 1, o: ["Section 1", "Section 2", "Section 3", "Section 4"] },
+        { q: "What makes Section 2 content different across permit types?", a: 3, o: ["Different approval signatures required for each type", "Varying insurance requirements based on work classification", "Different time durations allowed for each permit category", "Contents/items are specific to each of the four work permit types"] },
+        { q: "For Confined Space Entry permits, what attachments are MANDATORY?", a: 0, o: ["Confined Space Entry Plan and Confined Space Entry Log", "Gas Testing Records and Emergency Response Procedures", "Equipment Isolation Plan and Personal Protective Equipment List", "Hazard Analysis Checklist and Communication Protocol"] },
+        { q: "What are the ONLY acceptable isolation methods for confined space entry?", a: 1, o: ["Double block and bleed with locked valves", "Blinding or disconnect from energy sources", "Lockout/tagout with verified energy control", "Physical barriers with posted warning signs"] },
+        { q: "For equipment opening permits involving flammable liquids, ignition sources must be removed within what distance?", a: 2, o: ["15 meters (50 feet) from the opening point", "30 meters (100 feet) in all directions", "23 meters (75 feet) from the opening location", "46 meters (150 feet) to ensure safety margin"] },
+        { q: "Section 3 of the work permit form addresses which critical safety function?", a: 3, o: ["Emergency response procedures and evacuation routes", "Personal protective equipment requirements and training", "Equipment isolation methods and energy control", "Gas testing and atmospheric monitoring requirements"] },
+        { q: "Who must complete Section 3 'Gas Testing/Monitoring' and sign the form?", a: 1, o: ["Any qualified SA employee with monitoring experience", "A certified gas tester with proper credentials", "The work permit issuer or designated representative", "The confined space entry supervisor when applicable"] },
+        { q: "Gas testing is required prior to beginning work AND under what other circumstance?", a: 0, o: ["If the work permit is renewed for additional time", "When weather conditions change significantly", "If new personnel join the work crew", "When equipment modifications are made during work"] },
+        { q: "Section 4 'Permit Authorization & Closure' requires whose signatures for permit activation?", a: 2, o: ["The safety supervisor and facility manager", "The division head and the emergency response coordinator", "The issuer and receiver plus any additional required approvals", "The contractor representative and the SA oversight manager"] },
+        { q: "A joint site inspection must be conducted for which permits?", a: 3, o: ["Only confined space entry and hot work permits", "Equipment opening and line break permits exclusively", "High-risk permits as determined by the issuer", "All work permits without exception"] },
+        { q: "During joint site inspections, what atmospheric testing requirements must be met?", a: 1, o: ["Basic oxygen and combustible gas measurements only", "Testing per GI 2.100 and GI 2.709 with recorded results", "Hydrogen sulfide monitoring if deemed necessary by issuer", "Comprehensive air quality analysis by certified laboratory"] },
+        { q: "The Hazard Analysis Checklist must be signed by which parties to verify completion?", a: 0, o: ["Both the issuer (or designated representative) and the receiver", "The work crew supervisor and the safety representative", "The facility manager and the contractor's project lead", "All personnel involved in the work activity"] },
+        { q: "How many questions are included in the standard Hazard Analysis Checklist?", a: 2, o: ["15 standardized safety assessment questions", "18 comprehensive hazard evaluation items", "20 detailed safety verification questions", "25 complete risk assessment criteria"] },
+        { q: "When a Hazard Analysis Checklist question is answered 'NO', what must occur before work proceeds?", a: 3, o: ["The work crew must receive additional safety training", "The permit must be escalated to division head approval", "Alternative work methods must be documented and approved", "Issuer and receiver must analyze hazards and develop control methods"] },
+        { q: "Atmospheric gas testing must be conducted with what type of equipment?", a: 1, o: ["Any commercially available gas detection instruments", "Saudi Aramco approved gas monitoring equipment per GI 2.709", "Equipment certified by international safety standards only", "Instruments provided exclusively by SA-approved vendors"] },
+        { q: "Gas testing is required at locations where what conditions may exist?", a: 0, o: ["Injury to personnel or property damage could occur from hazardous atmosphere", "Any work involving mechanical equipment or electrical systems", "Contractor personnel will be working for extended periods", "Multiple work crews will be operating in proximity"] },
+        { q: "Oxygen (O2) testing shall be conducted for which specific activities?", a: 2, o: ["All hot work and equipment opening operations", "Any work in areas with potential ventilation issues", "All confined space entry activities and oxygen deficient/enriched areas", "Work involving respiratory protection or breathing apparatus"] },
+        { q: "What oxygen percentage range defines an oxygen deficient atmosphere?", a: 3, o: ["Below 18.0% oxygen concentration", "Less than 19.0% oxygen content", "Below 19.5% oxygen levels", "Less than 20.0% oxygen concentration"] },
+        { q: "Combustible gas testing (LEL) shall be conducted for which work activities?", a: 1, o: ["Only when flammable materials are visibly present", "All confined space entry, hot work in restricted areas, and areas where combustible gases may be present", "Hot work activities and equipment maintenance only", "Any work performed by contractor personnel"] },
+        { q: "What does 0% LEL indicate in combustible gas testing?", a: 0, o: ["A combustible gas-free atmosphere", "The minimum detectable gas concentration", "A safe working environment for all activities", "The calibration baseline for monitoring equipment"] },
+        { q: "Hydrogen sulfide (H2S) gas testing shall be conducted in areas where what materials are handled?", a: 2, o: ["Any petroleum products or chemical processing", "Maintenance work on pressurized systems", "Sour crude/gas is produced, transported, stored, or processed", "Confined spaces regardless of previous contents"] },
+        { q: "Who may perform gas tests in support of work permit activities?", a: 1, o: ["Any SA employee with basic safety training", "Only personnel with valid gas testing certificates from SA Training & Development", "Certified technicians from approved contractor companies", "Work permit issuers and designated representatives only"] },
+        { q: "How often must gas testing personnel be recertified?", a: 3, o: ["Annually with updated safety training", "Every 18 months with competency testing", "Every three years with comprehensive evaluation", "Every two years with proper testing and training"] },
+        { q: "At what combustible gas concentration is NO hot work allowed?", a: 0, o: ["Any reading above 0% LEL", "Concentrations above 5% LEL", "Readings of 10% LEL or higher", "When LEL exceeds 15% concentration"] },
+        { q: "When combustible gases read 5% LEL to 10% LEL, what safety measure is required?", a: 1, o: ["Enhanced ventilation and continuous monitoring", "Breathing apparatus must be used by all personnel", "Work may proceed with fire watch and extinguishers", "Hot work is prohibited but cold work may continue"] },
+        { q: "At what H2S concentration must breathing apparatus be used?", a: 2, o: ["Any detectable level above 0 ppm", "Concentrations of 5 ppm or higher", "10 ppm or above", "When levels reach 25 ppm"] },
+        { q: "H2S concentrations between 10 ppm and 100 ppm require what additional approval?", a: 3, o: ["Safety department supervisor signature", "Emergency response team notification", "Continuous atmospheric monitoring", "Division head must sign the permit"] },
+        { q: "At what H2S concentration is NO work or confined space entry allowed?", a: 1, o: ["50 ppm or above", "100 ppm or above", "150 ppm or higher", "200 ppm concentration"] },
+        { q: "For oxygen levels less than 20.0%, what dual requirements must be met?", a: 0, o: ["Breathing apparatus must be used AND division head must sign permit", "Enhanced ventilation AND continuous monitoring required", "Work stoppage AND atmospheric improvement before proceeding", "Emergency response standby AND respiratory protection training"] },
+        { q: "At what oxygen percentage is NO work allowed?", a: 2, o: ["Below 19.5% oxygen concentration", "Less than 20.0% oxygen content", "Above 23.5% oxygen levels", "When oxygen exceeds 25% concentration"] },
+        { q: "For Carbon Monoxide (CO) levels between 35 ppm and 1,000 ppm, what safety measure is required?", a: 1, o: ["Enhanced ventilation with continuous monitoring", "Breathing apparatus must be used", "Work may proceed with regular air monitoring", "Fire watch and emergency response standby required"] },
+        { q: "At what CO concentration is confined space entry prohibited?", a: 3, o: ["500 ppm or above", "750 ppm concentration", "850 ppm levels", "1,000 ppm or above"] },
+        { q: "Work permits are normally issued for what time duration?", a: 0, o: ["A single operating shift (issuer's shift)", "8 hours maximum regardless of shift length", "12 hours with possible extension", "24 hours with mandatory renewal"] },
+        { q: "Renewed work permits cannot exceed what total duration?", a: 1, o: ["16 hours total time", "24 hours maximum", "36 hours with approval", "48 hours under special circumstances"] },
+        { q: "A renewed work permit requires signatures from which parties?", a: 2, o: ["Original issuer and receiver plus safety supervisor", "Current shift supervisor and facility manager", "Both issuer and receiver coming on shift", "Division head and emergency response coordinator"] },
+        { q: "Extended work permits may be issued for periods not exceeding what maximum time?", a: 3, o: ["7 days for routine maintenance", "14 days for construction projects", "21 days with division head approval", "30 days maximum duration"] },
+        { q: "Who must sign extended work permits to authorize the duration?", a: 1, o: ["Facility operations manager and safety supervisor", "Division head or above of issuing and receiving organizations", "Project manager and contractor representative", "SA senior management and regulatory compliance officer"] },
+        { q: "When must work permits be immediately cancelled?", a: 0, o: ["When work activities or site conditions change creating additional hazards", "If equipment delivery delays occur beyond 4 hours", "When shift changes require personnel modifications", "If weather conditions become uncomfortable for workers"] },
+        { q: "Who specifies which work permits to cancel during emergency conditions?", a: 2, o: ["The senior work permit issuer on duty", "The facility emergency response coordinator", "The Incident Commander at the scene", "The division head or designated safety representative"] },
+        { q: "Work permits shall be closed by whom signing the permit form?", a: 3, o: ["The work crew supervisor and facility manager", "The safety representative and project coordinator", "The original issuer and the initial receiver", "Both the issuer and receiver after joint inspection"] },
+        { q: "Cold work is defined as activities that will NOT produce sufficient energy to ignite what materials?", a: 1, o: ["Any combustible substances in the work area", "Flammable atmospheres or combustible materials", "Hydrocarbon vapors or chemical compounds", "Pressurized gases or volatile liquids"] },
+        { q: "Which activity is an example of cold work?", a: 0, o: ["Removing or disturbing asbestos-containing material (ACM)", "Using pneumatic tools for equipment disassembly", "Applying heat guns for paint removal", "Operating battery-powered cutting equipment"] },
+        { q: "Cold work activities may still require which safety evaluations?", a: 2, o: ["Basic hazard identification and crew briefing", "Standard safety procedures and equipment inspection", "Joint site inspection and atmospheric gas tests", "Emergency response planning and communication protocols"] },
+        { q: "Hot work is defined as activities that may develop what sufficient for ignition?", a: 3, o: ["Electrical energy or mechanical friction", "Chemical reactions or pressure release", "Heat transfer or energy concentration", "Sparks, flames, or heat sufficient to cause ignition"] },
+        { q: "Which is an example of hot work requiring a permit?", a: 1, o: ["Using hand tools for mechanical assembly", "Spark-producing tools or abrasive blasting equipment", "Applying adhesives or sealants to surfaces", "Operating hydraulic equipment for lifting"] },
+        { q: "When performing hot work in hydrocarbon facilities, sewers and drains within what distance must be covered?", a: 0, o: ["23 meters (75 feet) from ignition sources", "30 meters (100 feet) in all directions", "15 meters (50 feet) from the work area", "46 meters (150 feet) for safety margin"] },
+        { q: "For hot work activities involving cutting, welding, or open flame, how long must fire watch remain after work completion?", a: 2, o: ["15 minutes minimum after work completion", "20 minutes with equipment inspection", "No less than 30 minutes after completion", "1 hour with area inspection and documentation"] },
+        { q: "Equipment Opening/Line Break permits are required for opening systems containing what types of materials?", a: 3, o: ["Any pressurized fluids or gases", "Maintenance-related chemicals or lubricants", "Process fluids regardless of hazard classification", "Flammable, combustible, toxic, or injurious materials"] },
+        { q: "Prior to equipment opening/line break, what must be controlled according to GI 6.012?", a: 1, o: ["Work crew assignments and safety briefings", "Energy sources with proper isolation procedures", "Environmental conditions and weather factors", "Emergency response resources and communication"] },
+        { q: "When opening equipment in flammable service, ignition sources must be removed within what distance?", a: 0, o: ["23 meters (75 feet) from the point of opening", "30 meters (100 feet) in all directions", "15 meters (50 feet) with fire watch", "46 meters (150 feet) for safety assurance"] },
+        { q: "When unbolting flange connections, bolts must be loosened to create cracking at which position?", a: 2, o: ["12 o'clock position (top) for visibility", "3 o'clock position (side) for access", "5 o'clock position (down and away from worker)", "9 o'clock position (side) for drainage"] },
+        { q: "For H2S-containing systems, what respiratory protection is required during initial opening?", a: 3, o: ["Personal H2S monitors with escape respirator", "Supplied air with emergency escape capability", "Full-face respirator with appropriate cartridges", "SCBA or air-line respirator equipment"] },
+        { q: "When H2S levels are at or above 10 ppm, what work practice is required?", a: 1, o: ["Enhanced atmospheric monitoring frequency", "Use of the buddy system", "Continuous respiratory protection", "Emergency response team standby"] },
+        { q: "Confined space entry is defined as entrance of any part of the body into spaces meeting what criteria?", a: 0, o: ["Specific confined space classification criteria", "Areas requiring special access equipment", "Spaces with limited visibility or lighting", "Locations designated as high-risk by management"] },
+        { q: "A confined space has limited entry/exit means AND is not designed for what?", a: 2, o: ["Extended work periods or tool storage", "Equipment installation or maintenance access", "Human occupancy", "Vehicle or machinery operation"] },
+        { q: "Structures or excavations of what depth are considered confined spaces?", a: 3, o: ["0.9 meters (3 feet) deep or deeper", "1.0 meter (3.3 feet) or deeper", "1.5 meters (5 feet) deep or deeper", "1.2 meters (4 feet) deep or deeper"] },
+        { q: "Each confined space entry requires designation of what supervisory position?", a: 1, o: ["A confined space safety coordinator", "A confined space entry supervisor (CSES)", "A confined space atmospheric monitor", "A confined space emergency response leader"] },
+        { q: "The confined space entry standby man shall maintain what documentation?", a: 0, o: ["Confined space entry log and continuous count of entrants", "Gas testing records and atmospheric monitoring data", "Equipment inspection reports and safety compliance", "Emergency response procedures and evacuation routes"] },
+        { q: "Can the designated confined space entry standby man enter the confined space?", a: 2, o: ["Yes, if equipped with proper safety equipment", "Yes, during emergency rescue situations only", "Never attempt entry into the confined space", "Yes, when relieved by another qualified standby"] },
+        { q: "For confined space entry, what isolation methods are acceptable for process piping?", a: 3, o: ["Double block and bleed with locked valves", "Lockout/tagout with energy verification", "Single valve closure with lock and tag", "Blinding or disconnection only"] },
+        { q: "Before confined space entry gas testing, mechanical ventilation must be shut down for how long?", a: 1, o: ["10 minutes minimum before testing", "At least 15 minutes prior to test", "20 minutes to ensure accurate readings", "30 minutes for complete atmosphere settling"] },
+        { q: "If personnel may fall more than what distance in confined space, fall protection is required?", a: 0, o: ["1.8 meters (6 feet)", "2.0 meters (6.5 feet)", "2.5 meters (8 feet)", "3.0 meters (10 feet)"] },
+        { q: "Confined space atmospheric testing must include which minimum gas measurements?", a: 2, o: ["Oxygen and combustible gases only", "H2S and carbon monoxide exclusively", "Oxygen, LEL, toxic gases (H2S), and carbon monoxide", "All gases specified in the entry plan"] },
+        { q: "Gas testing within confined spaces shall be performed how frequently during work?", a: 3, o: ["Once before entry and at shift changes", "Every 30 minutes during continuous work", "When conditions change or work is interrupted", "Prior to entry, after breaks, and at periodic intervals as necessary"] },
+        { q: "Who must conduct gas tests in support of work permit activities?", a: 1, o: ["Any qualified maintenance technician", "Only SA-certified gas testers", "Work permit issuers or designated representatives", "Confined space entry supervisors with training"] },
+        { q: "Which GI document covers the Use of Portable Gas Monitors?", a: 0, o: ["GI 2.709", "GI 2.100", "GI 6.012", "GI 3.100"] },
+        { q: "Which GI document addresses Isolation, Lockout and Use of Hold Tags?", a: 2, o: ["GI 2.100", "GI 2.709", "GI 6.012", "GI 4.200"] },
+        { q: "The work permit system manages hazards within Saudi Aramco's wide range of what?", a: 3, o: ["Facility operations and maintenance schedules", "Personnel assignments and contractor relationships", "Equipment purchases and inventory management", "Activities that may pose hazards to personnel, equipment, operations, or environment"] },
+        { q: "Necessary precautions beyond work permits include process isolation, equipment preparation, AND what other safety measure?", a: 1, o: ["Enhanced crew training and competency verification", "Providing barriers to prevent personal injury", "Increased supervision and monitoring frequency", "Emergency response team pre-positioning"] },
+        { q: "Restricted activities are those that present potential hazards to personnel, facilities, equipment, OR what else?", a: 0, o: ["Operations", "Contractors", "Vehicles", "Documentation"] },
+        { q: "A work permit issuer must have experience and knowledge to adequately assess job hazards AND be capable of what else?", a: 2, o: ["Training work crews in proper safety procedures", "Coordinating with emergency response resources", "Prescribing appropriate precautionary measures", "Managing contractor relationships and performance"] },
+        { q: "Work permit issuers must authorize and issue permits per requirements of which document?", a: 3, o: ["SA Safety Handbook guidelines", "Local facility operating procedures", "Company-wide safety management system", "GI 2.100 requirements"] },
+        { q: "Issuers must verify that gas monitoring equipment has correct sensors for what purpose?", a: 1, o: ["Calibrating equipment to manufacturer specifications", "Detecting the specific gases expected at the job site", "Ensuring compatibility with SA monitoring systems", "Meeting regulatory compliance requirements"] },
+        { q: "Gas test results must be entered on the work permit AND the gas tester must do what else?", a: 0, o: ["Sign the corresponding gas testing section", "Notify the safety department of results", "File a copy with facility management", "Brief the work crew on atmospheric conditions"] },
+        { q: "What must issuers do if job sites don't meet permit conditions or SA safety requirements?", a: 2, o: ["Document deficiencies and continue monitoring", "Notify supervision and request guidance", "Stop work and ensure corrective actions before resuming", "Modify permit conditions to match site reality"] },
+        { q: "When closing work permits, issuers must conduct joint site inspection to verify what condition?", a: 3, o: ["All work has been completed to specifications", "Equipment is properly secured and locked out", "Work crews have been properly debriefed", "Work area has been left in safe and secure condition"] },
+        { q: "Designated representatives are individuals who are experienced, competent, AND familiar with what?", a: 1, o: ["Emergency response procedures and protocols", "Company work permit system requirements", "Contractor management and oversight", "Regulatory compliance and audit procedures"] },
+        { q: "If designated representatives conduct gas tests, they must ensure monitoring equipment has what validation?", a: 0, o: ["Valid calibration-due-date sticker or system memory date", "Recent inspection by certified technician", "Manufacturer warranty and service agreement", "Insurance coverage and operator certification"] },
+        { q: "Designated representatives must conduct joint site inspections when requested by whom?", a: 2, o: ["The safety department supervisor", "The facility operations manager", "The work permit issuer", "The work crew supervisor"] },
+        { q: "Work permit receivers must receive proper permits from whom before executing work?", a: 3, o: ["The facility operations manager", "A designated safety representative", "Any qualified SA employee", "An SA-certified issuer"] },
+        { q: "Receivers must participate in joint site inspection including what analysis with the issuer?", a: 1, o: ["Cost-benefit analysis", "Hazard analysis", "Schedule analysis", "Resource analysis"] },
+        { q: "If receivers must leave work areas, permits may be given to another SA-certified receiver who has been what?", a: 0, o: ["Agreed to in advance with issuer and listed on permit", "Approved by the safety department for the transfer", "Briefed by the original receiver on job conditions", "Certified for the specific type of work being performed"] },
+        { q: "Receivers must participate in joint site inspection to verify what before permit closure?", a: 2, o: ["All equipment has been properly tested and inspected", "Work completion meets quality and specification requirements", "Work area has been left in safe and secure condition", "All personnel have been accounted for and debriefed"] },
+        { q: "The issuer determines correct permits for jobs from which four main types?", a: 3, o: ["Maintenance, Construction, Inspection, Emergency", "Routine, Special, Emergency, Extended", "Internal, External, Contractor, SA Employee", "Cold Work, Hot Work, Equipment Opening/Line Break, Confined Space Entry"] },
+        { q: "Issuers must verify receiver certificates are valid AND approved by proponent organization for what?", a: 1, o: ["The specific facility and work location", "The type of work to be performed", "The duration and complexity of work", "The number of personnel involved"] },
+        { q: "In Section 1 Work Description, what equipment information must be listed?", a: 0, o: ["Equipment to be used during the work", "Equipment requiring isolation or lockout", "Equipment inspection and certification status", "Equipment manufacturer and model specifications"] },
+        { q: "Section 2 contents are different for each work permit type. How many types have different Section 2 requirements?", a: 2, o: ["Three main permit types", "Five standard classifications", "Four work permit types", "Six distinct categories"] },
+        { q: "Applicable checklists and forms must be attached to permits providing what type of information?", a: 3, o: ["Regulatory compliance and audit documentation", "Cost estimation and resource planning details", "Personnel qualifications and training records", "Supplemental information and approvals for work activities"] },
+        { q: "Energy types that must be controlled include hydrocarbons, high pressure steam, mechanical energy, electrical energy, AND what else?", a: 1, o: ["Chemical processing and reaction energy", "Hydraulic/pneumatic pressure and potential energy", "Thermal energy and radiation sources", "Electromagnetic and acoustic energy"] },
+        { q: "Isolation methods include locking electrical switches, mechanical blocks, valve closures, double block and bleed, blinding, AND what else?", a: 0, o: ["Disconnecting from energy source", "Installing temporary barriers", "Posting warning signs", "Implementing administrative controls"] },
+        { q: "Potential worker exposures include high noise, H2S, flammable liquids/gases, toxic chemicals, radioactive materials, AND what else?", a: 2, o: ["Electrical shock and arc flash", "Slip, trip, and fall hazards", "High temperatures", "Mechanical crushing and cutting"] },
+        { q: "For equipment opening permits involving flammable materials, what activities must be notified?", a: 3, o: ["All facility personnel and emergency services", "Management and regulatory oversight agencies", "Safety department and medical facilities", "Downwind activities or operations"] },
+        { q: "Fire protection methods may include extinguishers, fire monitors/hoses, wetting areas, AND what else?", a: 1, o: ["Foam suppression systems", "Fire barriers or shields", "Sprinkler system activation", "Emergency evacuation procedures"] },
+        { q: "For confined space entry permits, whose badge numbers must be entered on the permit?", a: 0, o: ["Confined space entry supervisor and standby man", "Gas tester and safety representative", "Work permit issuer and receiver", "Emergency response coordinator and medical standby"] },
+        { q: "Emergency actions must be listed on permits including contact numbers AND what else?", a: 2, o: ["Medical facility locations and capabilities", "Emergency equipment locations and procedures", "Worker assembly area locations", "Regulatory notification requirements"] },
+        { q: "Gas testing is required prior to work AND when else?", a: 3, o: ["When atmospheric conditions change", "When new personnel join the crew", "When equipment is modified", "If the work permit is renewed"] },
+        { q: "If continual or periodic gas monitoring is required, what must be specified and attached?", a: 1, o: ["Monitoring equipment specifications and calibration", "Frequency on permit and supplemental gas test record", "Personnel qualifications and training records", "Emergency response procedures for alarm conditions"] },
+        { q: "Additional approvals or signatures are required for extended permits, certain atmospheric conditions, OR what else?", a: 0, o: ["Higher risk activities per local work permit process", "Work involving external contractors", "Operations affecting multiple facilities", "Activities requiring regulatory notification"] },
+        { q: "If job site activities will affect additional operations or facilities, what must the issuer obtain?", a: 2, o: ["Environmental impact assessment and mitigation plan", "Additional insurance coverage and liability protection", "Approval and countersignature of all applicable organizations", "Regulatory permits and compliance documentation"] },
+        { q: "Joint site inspections allow for what before commencing work?", a: 3, o: ["Final equipment checks and crew assignments", "Weather assessment and schedule confirmation", "Cost verification and resource allocation", "Sharing of information"] },
+        { q: "During joint site inspection, atmospheric gas tests must be conducted per which documents?", a: 1, o: ["SA Safety Handbook and local procedures", "GI 2.100 and GI 2.709", "Company safety manual and training guides", "Manufacturer instructions and industry standards"] },
+        { q: "Joint site inspection includes assessment of work activity, equipment, AND what else?", a: 0, o: ["Working environment", "Personnel qualifications", "Cost implications", "Schedule requirements"] },
+        { q: "Hazard analysis assessment must be performed by issuer (or designated representative) AND whom?", a: 2, o: ["The safety department representative", "The facility operations manager", "The receiver", "The work crew supervisor"] },
+        { q: "The Hazard Analysis Checklist uses what response options for each question?", a: 3, o: ["Pass, Fail, or Conditional", "Acceptable, Unacceptable, or Review Required", "Safe, Unsafe, or Needs Attention", "YES, NO, or N/A (not applicable)"] },
+        { q: "Question 1 on the Hazard Analysis Checklist asks about what permit characteristic?", a: 1, o: ["Proper duration and timing for the work", "Correct type of permit(s) issued for work", "Adequate safety resources and equipment", "Appropriate personnel assignments and qualifications"] },
+        { q: "Question 11 on the checklist addresses system/equipment isolation AND what worker action?", a: 0, o: ["Did all workers apply their personal locks", "Have all workers been trained on isolation procedures", "Are all workers equipped with proper PPE", "Have all workers signed the safety acknowledgment"] },
+        { q: "Question 18 on the checklist addresses coordination when other work crews are nearby, referred to as what?", a: 2, o: ["Multi-crew operations (MCO)", "Parallel work activities (PWA)", "Simultaneous operations (SIMOPS)", "Coordinated work execution (CWE)"] },
+        { q: "Any 'NO' answers on the Hazard Analysis Checklist initiate what action point?", a: 3, o: ["PAUSE for additional safety review", "HOLD for management approval", "REVIEW for alternative methods", "STOP for hazard analysis and control development"] },
+        { q: "Additional precautions from hazard analysis must be listed in which permit section?", a: 1, o: ["Section 1 - Work Description", "Section 2 - Hazard Identification and Control", "Section 3 - Gas Testing/Monitoring", "Section 4 - Permit Authorization & Closure"] },
+        { q: "Atmospheric gas testing is required where injury to personnel OR what else could occur?", a: 0, o: ["Damage to property from hazardous atmosphere", "Equipment malfunction from atmospheric conditions", "Environmental impact from gas release", "Operational disruption from atmospheric hazards"] },
+        { q: "Gas testing should be performed continuously or periodically during work as what?", a: 2, o: ["Required by regulations", "Specified in procedures", "Necessary", "Determined by management"] },
+        { q: "Oxygen testing is required for confined space entry AND areas with potential for what atmospheric conditions?", a: 3, o: ["High humidity or moisture content", "Temperature extremes or thermal variations", "Poor ventilation or air circulation", "Oxygen deficient (less than 20.0%) or enriched (greater than 23.5%)"] },
+        { q: "LEL testing is required for confined space entry, hot work in restricted areas, AND where else?", a: 1, o: ["Any maintenance work on pressurized systems", "All work locations where combustible gases may be present", "Areas designated as high-risk by facility management", "Work involving electrical equipment or systems"] },
+        { q: "100% LEL represents what atmospheric condition?", a: 0, o: ["An atmosphere where gas is at its lower explosive limit", "The maximum safe working concentration", "The point requiring immediate evacuation", "The threshold for enhanced safety measures"] },
+        { q: "H2S testing is required for confined space entry where H2S may be present AND what other locations?", a: 2, o: ["Any area with petroleum processing equipment", "Locations with previous H2S detection history", "Jobs near sewage treatment plants and sewer lift stations", "Areas designated as sour service by operations"] },
+        { q: "CO testing shall be conducted for what specific type of work activity?", a: 3, o: ["Any work in enclosed or poorly ventilated areas", "Hot work activities involving combustion processes", "Equipment opening where CO exposure is possible", "All confined space entry activities"] },
+        { q: "Gas testing equipment manufacturer instruction manuals shall be consulted for what activities?", a: 1, o: ["Initial equipment selection and purchasing", "Operating, calibrating, or function testing instruments", "Training personnel and maintaining competency", "Documenting test results and maintaining records"] },
+        { q: "Gas testing certificates are issued by whom and signed by whom?", a: 0, o: ["SA Training & Development, signed by gas tester's division head", "Safety department, signed by facility manager", "Training department, signed by operations supervisor", "Certification body, signed by authorized representative"] },
+        { q: "When gas monitor alarm conditions occur, what action must be taken?", a: 2, o: ["Increase monitoring frequency and enhance safety measures", "Document conditions and notify supervision immediately", "Stop work until proper controls are implemented", "Evacuate area and contact emergency response"] },
+        { q: "Additional toxic gases requiring testing may include CO2, SO2, Cl2, NH3, HCl, AND what else?", a: 3, o: ["Methane (CH4)", "Propane (C3H8)", "Nitrogen (N2)", "Mercury vapor (Hg)"] },
+        { q: "Questions about other toxic gas testing should be directed to which department?", a: 1, o: ["Environmental Health and Safety", "Saudi Aramco Loss Prevention Department", "Industrial Hygiene and Occupational Health", "Emergency Response and Crisis Management"] },
+        { q: "Renewed permits require signatures, countersigning organization notification, AND indicate what about permit conditions?", a: 0, o: ["Complete agreement with conditions stated on permit form", "Understanding of changes from original permit", "Acceptance of additional safety requirements", "Commitment to enhanced monitoring and oversight"] },
+        { q: "Extended permits apply to prolonged construction or maintenance where hazards and precautions remain what?", a: 2, o: ["Minimal and well-controlled", "Documented and approved", "Unchanged", "Monitored and managed"] },
+        { q: "Extended permits may be issued only when it's highly unlikely that what will develop?", a: 3, o: ["Equipment failures or operational problems", "Weather conditions affecting work execution", "Personnel changes or resource limitations", "Conditions creating additional hazards to personnel, equipment, operations, or environment"] },
+        { q: "When work is cancelled, the issuer must write what information on the permit?", a: 1, o: ["New safety requirements and corrective measures", "Reason for cancellation, time, and other relevant information", "Personnel involved and equipment affected", "Cost impact and schedule implications"] },
+        { q: "After deficiencies are corrected following permit cancellation, what may be done?", a: 0, o: ["A new work permit may be issued", "The original permit may be reactivated", "Work may resume under enhanced monitoring", "A temporary permit may be issued"] },
+        { q: "Alternative methods for closing permits may be established when what makes signing impractical?", a: 2, o: ["Personnel scheduling conflicts", "Equipment or communication limitations", "Remoteness of the job site", "Weather or environmental conditions"] },
+        { q: "Alternative permit closure methods must be written where?", a: 3, o: ["In the facility operating procedures", "On a separate documentation form", "In the safety management system", "On the original work permit form when issued"] },
+        { q: "Cold work examples include removing ACM, erecting scaffolds, brush painting, hand excavation, installing shoring, using hand tools, AND what else?", a: 1, o: ["Operating battery-powered equipment", "Repairing a packing gland on a pump", "Applying adhesives or sealants", "Using pneumatic hand tools"] },
+        { q: "Even cold work can involve hazards requiring what during joint site inspection?", a: 0, o: ["Evaluation and atmospheric gas tests", "Enhanced crew training and briefing", "Additional safety equipment and procedures", "Increased supervision and monitoring"] },
+        { q: "Hot work examples include open flames/welding, spark-producing tools, abrasive blasting, internal combustion engines in restricted areas, work near live electrical apparatus, AND what else?", a: 2, o: ["Using power tools with rotating components", "Operating equipment above certain temperatures", "Devices not rated for the electrical classification of area", "Activities involving friction or mechanical energy"] },
+        { q: "Hot work permits control activities that may produce enough energy to ignite what materials?", a: 3, o: ["Any combustible substances in the vicinity", "Hydrocarbon vapors or chemical compounds", "Pressurized gases or volatile liquids", "Flammable atmospheres or combustible materials"] },
+        { q: "When performing hot work, fire protection equipment must be available AND what additional requirement exists for cutting/welding?", a: 1, o: ["Emergency response team must be notified", "Fire watch shall remain for no less than 30 minutes after work", "Enhanced ventilation must be provided during work", "Additional safety personnel must be assigned"] },
+        { q: "Combustible materials around hot work areas must be protected by fireproof material OR what alternative method?", a: 0, o: ["Wetting down the area", "Removing materials from vicinity", "Installing fire barriers", "Providing enhanced monitoring"] },
+        { q: "Equipment opening/line break examples include opening oil/gas lines, steam/condensate lines, H2S lines, nitrogen lines, AND what else?", a: 2, o: ["Compressed air and hydraulic lines", "Water and utility service lines", "Lines containing hazardous materials (caustic, sulfuric acid)", "Instrument and control system lines"] },
+        { q: "Equipment opening/line break precautions include removing ignition sources, notifying downwind activities, designating standby/fire watch, assuming pressurization, AND what else?", a: 3, o: ["Providing emergency response equipment", "Installing additional monitoring equipment", "Enhancing communication protocols", "Using appropriate PPE including respiratory protection"] },
+        { q: "For H2S-containing systems, opening permits must include gas testing, personal monitors, trained standby man, area notification, emergency actions, respiratory protection, AND what else when H2S ≥ 10 ppm?", a: 1, o: ["Enhanced emergency response resources", "Use of the buddy system", "Continuous atmospheric monitoring", "Medical standby personnel"] },
+        { q: "Atmospheric testing after equipment opening must verify what before continuing work?", a: 0, o: ["Atmosphere is safe for work activities", "Equipment is properly depressurized", "Area is clear of hazardous materials", "Ventilation is adequate for work"] },
+        { q: "Confined space examples include tanks, vessels, vessel skirts, vaults, manholes, sewers, valve boxes, lift stations, excavations ≥1.2m deep, AND what else?", a: 2, o: ["Equipment rooms with limited access", "Underground utility tunnels and vaults", "Areas above floating roof tanks where roof is >1.2m below rim", "Process buildings with restricted ventilation"] },
+        { q: "Each confined space entry requires CSES, standby man, entry log, AND what else?", a: 3, o: ["Emergency response team notification", "Enhanced communication equipment", "Medical standby personnel", "Confined space entry plan"] },
+        { q: "The confined space entry plan must include hazard evaluation, isolation points/methods, flushing/purging/ventilation procedures, access/egress requirements, atmospheric monitoring, equipment requirements, PPE requirements, multi-crew hazard identification, AND what else?", a: 1, o: ["Cost estimation and resource planning", "Emergency response/rescue procedures", "Training requirements and competency verification", "Regulatory compliance and documentation"] },
+        { q: "Confined space atmospheric monitoring must address testing frequency, work activity requirements, gas types, ventilation shutdown timing, certified tester requirements, equipment specifications, fall protection planning, AND what else?", a: 0, o: ["Emergency response/rescue procedures and equipment", "Personnel medical clearance and fitness", "Communication protocols and backup systems", "Quality assurance and documentation requirements"] },
+        { q: "The work permit system is an integral part of how SA manages hazards within its wide range of what?", a: 2, o: ["Operational responsibilities and commitments", "Business activities and strategic objectives", "Activities", "Facility operations and maintenance programs"] },
+        { q: "Safe execution can only be achieved by those responsible for preparation and supervision, which requires identification and implementation of necessary precautions including isolation, equipment preparation, AND what?", a: 3, o: ["Enhanced training and competency verification", "Increased monitoring and communication", "Regulatory compliance and documentation", "Providing barriers to prevent personal injury"] },
+        { q: "The comprehensive work permit system addresses four main work categories through specific permit types, requires joint site inspections with hazard analysis, mandates atmospheric testing with certified equipment and personnel, and establishes what for permit management?", a: 1, o: ["Cost tracking and resource optimization procedures", "Clear responsibilities and approval authorities", "Training requirements and competency standards", "Documentation and record-keeping systems"] },
+        { q: "Gas testing must be performed by certified personnel using SA-approved equipment, with specific action levels for oxygen, LEL, H2S, and CO that may require breathing apparatus, division head approval, or complete work prohibition, ensuring what?", a: 0, o: ["Safe atmospheric conditions for all work activities", "Compliance with regulatory requirements", "Proper equipment function and calibration", "Adequate emergency response preparedness"] },
+        { q: "Work permits may be issued for single shifts, renewed for up to 24 hours, or extended for up to 30 days, but must be cancelled immediately when conditions change, and closed only after what?", a: 2, o: ["All work is completed to specification", "All personnel have been properly debriefed", "Joint site inspection confirms safe and secure conditions", "All equipment has been tested and secured"] },
+        { q: "The four permit types (Cold Work, Hot Work, Equipment Opening/Line Break, Confined Space Entry) each have specific requirements, with confined space entry requiring the most comprehensive planning including entry plans, atmospheric monitoring, emergency response procedures, and what?", a: 3, o: ["Enhanced medical support and emergency services", "Additional insurance coverage and liability protection", "Specialized equipment and communication systems", "Designated supervisors and standby personnel"] },
+        { q: "How should entry points to confined spaces be managed during entry?", a: 3, o: ["Lock them", "Guard them", "Mark them", "Keep them unobstructed and accessible"] },
+        { q: "What is required for all personnel entering a confined space?", a: 1, o: ["Safety helmet only", "Full body harness and retrieval system", "Steel-toed boots", "High-visibility vest"] },
+        { q: "When must a work permit be renewed?", a: 0, o: ["When extending beyond single shift with no changes to scope", "Daily", "Weekly", "When requested by receiver"] },
+        { q: "What determines if a Designated Representative can perform permit duties?", a: 2, o: ["Years of experience", "Job title", "Proper training and authorization by permit issuer", "Educational background"] },
+        { q: "How must hazardous energy be controlled during equipment opening?", a: 1, o: ["Verbal warnings", "Lockout/tagout procedures per GI 6.012", "Posted signs", "Barriers"] },
+        { q: "What is the maximum duration for a single work permit without renewal?", a: 3, o: ["8 hours", "12 hours", "16 hours", "One operating shift"] },
+        { q: "Who determines if low-risk activities in restricted areas need permits?", a: 0, o: ["Proponent organization management", "Safety department", "Area supervisor", "Work crew"] },
+        { q: "What must be done if additional hazards are discovered during work?", a: 2, o: ["Continue work carefully", "Notify supervisor only", "Stop work and reassess with new permit if needed", "Complete current task first"] },
+        { q: "How should combustible gas readings between 0-5% LEL be handled for hot work?", a: 1, o: ["Proceed normally", "No hot work allowed", "Use fire watch", "Get supervisor approval"] },
+        { q: "What emergency response capability must be available during confined space entry?", a: 3, o: ["Fire truck", "Ambulance", "Security", "Trained rescue team and equipment"] },
+        { q: "When can a standby person leave their post during confined space entry?", a: 0, o: ["Never, unless properly relieved by qualified personnel", "For short breaks", "When entry personnel are experienced", "During emergency situations"] },
+        { q: "What type of communication must be maintained during confined space entry?", a: 2, o: ["Visual signals only", "Radio only", "Continuous communication between entrants and standby", "Hourly check-ins"] },
+        { q: "How should ventilation be managed in confined spaces?", a: 1, o: ["Not required", "Continuous mechanical ventilation when specified", "Natural ventilation only", "Ventilation only before entry"] },
+        { q: "What must be verified about rescue equipment before confined space entry?", a: 0, o: ["Available, tested, and personnel trained in its use", "Present at site", "Recently purchased", "Approved brand"] },
+        { q: "When is hot work prohibited regardless of gas readings?", a: 3, o: ["During night shifts", "In windy conditions", "During rain", "In oxygen-enriched atmospheres above 23.5%"] },
+        { q: "What documentation must accompany an extended work permit?", a: 2, o: ["Medical clearance", "Insurance certificate", "Justification for extended duration", "Tool inspection records"] },
+        { q: "How often must confined space atmospheric conditions be monitored?", a: 1, o: ["Once before entry", "Continuously or as specified in the permit", "Hourly", "At shift changes only"] },
+        { q: "What is required when work scope changes from the original permit?", a: 0, o: ["New permit must be issued", "Verbal approval sufficient", "Written amendment to existing permit", "Supervisor notification only"] },
+        { q: "Who has final authority to stop work for safety violations?", a: 2, o: ["Work receiver", "Area supervisor", "Work permit issuer or designated representative", "Safety department only"] },
+        { q: "What must be considered when selecting PPE for confined space entry?", a: 3, o: ["Cost", "Availability", "Worker preference", "Specific hazards identified in the hazard analysis"] },
+        { q: "How should tools and equipment be managed during confined space entry?", a: 1, o: ["Any tools allowed", "Only intrinsically safe tools in hazardous atmospheres", "Standard industrial tools", "Battery-powered tools preferred"] },
+        { q: "What is the minimum requirement for lighting in confined spaces?", a: 0, o: ["Intrinsically safe lighting meeting SA standards", "Standard flashlights", "Natural lighting when possible", "Battery-powered lanterns"] },
+        { q: "When must atmospheric testing be repeated in confined spaces?", a: 2, o: ["Never", "Daily", "When conditions change or work is interrupted", "Weekly"] },
+        { q: "What type of training must confined space entrants complete?", a: 3, o: ["General safety training", "First aid training", "Equipment operation training", "SA-approved confined space entry training"] },
+        { q: "How should emergency evacuation be planned for confined spaces?", a: 1, o: ["Not required", "Detailed evacuation plan with practiced procedures", "Verbal instructions only", "Posted emergency numbers"] },
+
+        // Additional 82 questions to reach 600 total
+        { q: "What is the fundamental principle behind Saudi Aramco's work permit system implementation?", a: 2, o: ["Reducing operational costs through efficient processes", "Maintaining productivity during maintenance activities", "Systematic hazard identification and risk control", "Ensuring regulatory compliance with government standards"] },
+        { q: "According to GI 2.100, which factor determines whether a work activity requires a permit?", a: 1, o: ["The duration of the planned work activity", "The potential for hazard exposure to personnel or facilities", "The number of personnel involved in the work", "The cost and complexity of the work scope"] },
+        { q: "What distinguishes restricted areas from general work areas in SA facilities?", a: 3, o: ["Areas requiring security clearance for access", "Locations with expensive or critical equipment", "Zones with limited vehicle or equipment access", "Areas where hazardous materials are handled, stored, or processed in bulk quantities"] },
+        { q: "When can low-risk activities in restricted areas be exempted from permit requirements?", a: 0, o: ["As determined by proponent organization management based on risk assessment", "When performed by SA employees with over 10 years experience", "During daylight hours with adequate supervision", "When the work duration is less than 2 hours"] },
+        { q: "What qualifications must a Work Permit Issuer possess beyond SA employment?", a: 2, o: ["Engineering degree and 5 years industrial experience", "Safety certification and management approval", "Experience, knowledge to assess hazards, and division/department head certification", "Project management training and operational background"] },
+        { q: "If a Work Permit Issuer also performs gas testing duties, what additional requirement applies?", a: 1, o: ["Enhanced insurance coverage and liability protection", "Valid gas testing certificate and proper equipment authorization", "Specialized training in emergency response procedures", "Medical clearance for respiratory fitness assessment"] },
+        { q: "What is the most critical responsibility of a Work Permit Issuer during active work?", a: 3, o: ["Maintaining detailed records of all work activities", "Coordinating with other departments and contractors", "Ensuring work completion within scheduled timeframes", "Frequent monitoring to ensure permit conditions and safety requirements are maintained"] },
+        { q: "Under what circumstances must a Work Permit Issuer immediately cancel active permits?", a: 0, o: ["When changes in work activities or site conditions create additional hazards", "When the original work scope is completed ahead of schedule", "When weather conditions become uncomfortable for workers", "When contractor personnel request schedule modifications"] },
+        { q: "Who has the authority to cancel ALL permits in an emergency-affected area?", a: 2, o: ["The senior Work Permit Issuer on duty", "The facility operations manager or designee", "The Incident Commander specified for the emergency response", "The Saudi Aramco emergency response coordinator"] },
+        { q: "What is the primary limitation on Designated Representatives regarding permit issuance?", a: 1, o: ["They can only issue permits for cold work activities", "They cannot issue permits but can perform associated duties", "They require supervisor approval for each permit issued", "They can only work with SA employee receivers"] },
+        { q: "When a Designated Representative conducts gas testing, what equipment requirement must be met?", a: 3, o: ["Equipment must be less than one year old", "Instruments must be SA-purchased and maintained", "Calibration must be performed by certified technicians", "Valid calibration-due-date sticker and correct sensors for expected gases"] },
+        { q: "What action must a Designated Representative take if job sites don't meet permit conditions?", a: 0, o: ["Stop work immediately and inform the Work Permit Issuer", "Document deficiencies and continue with enhanced monitoring", "Modify permit conditions to match actual site conditions", "Notify the safety department and await instructions"] },
+        { q: "Who can serve as a Work Permit Receiver in the SA system?", a: 2, o: ["Only Saudi Aramco employees with proper certification", "Any qualified person with relevant industrial experience", "SA employees or contractor employees sponsored by SA organization", "Certified safety professionals approved by the facility manager"] },
+        { q: "What is the first and most fundamental responsibility of a Work Permit Receiver?", a: 1, o: ["Conduct thorough site inspection before starting work", "Maintain possession of valid SA work permit receiver certificate", "Ensure all crew members understand the work scope", "Verify availability of all required tools and equipment"] },
+        { q: "Where must a Work Permit Receiver keep the signed permit during work execution?", a: 3, o: ["Filed in the main office for inspection access", "With the immediate supervisor for quick reference", "Posted at the facility entrance for visibility", "In their possession or in view at the job site"] },
+        { q: "Under what condition can a Work Permit Receiver transfer permit responsibility?", a: 0, o: ["To another SA-certified receiver agreed upon in advance with the issuer", "To any crew member with relevant experience", "To the site supervisor during emergencies only", "To contractor management with verbal approval"] },
+        { q: "What immediate action must a receiver take when site conditions change?", a: 2, o: ["Continue work with enhanced safety precautions", "Document changes and notify supervisor at shift end", "Stop work immediately and inform the Work Permit Issuer", "Reduce work scope to minimize additional risks"] },
+        { q: "How many main categories of work permits are established in the SA system?", a: 1, o: ["Three primary classifications", "Four main types", "Five standard categories", "Six distinct permit types"] },
+        { q: "Which combination represents the complete set of SA work permit types?", a: 3, o: ["Maintenance, Construction, Inspection, Emergency", "General, Restricted, Hot Work, Confined Space", "Low Risk, Medium Risk, High Risk, Critical", "Cold Work, Hot Work, Equipment Opening/Line Break, Confined Space Entry"] },
+        { q: "Can multiple permit types be required for a single work activity?", a: 0, o: ["Yes, complex jobs may require more than one permit type", "No, only one permit type is allowed per activity", "Only with division head approval for exceptional circumstances", "Yes, but only for emergency response situations"] },
+        { q: "Who makes the determination of which permit type(s) are required for specific work?", a: 2, o: ["The Work Permit Receiver based on work analysis", "The safety department after hazard assessment", "The Work Permit Issuer based on job requirements", "The proponent organization manager after review"] },
+        { q: "What information must be specified in Section 1 'Work Description' of the permit form?", a: 1, o: ["General area designation and approximate work zone", "Exact work location, equipment identification, and work description", "Building complex and floor level where work occurs", "GPS coordinates and detailed site mapping references"] },
+        { q: "What makes Section 2 'Hazard Identification & Control' unique across permit types?", a: 3, o: ["Different signature requirements for each permit category", "Varying insurance and liability provisions by work type", "Different time durations allowed for each permit classification", "Contents and items are specific to each of the four work permit types"] },
+        { q: "For Confined Space Entry permits, which attachments are mandatory?", a: 0, o: ["Confined Space Entry Plan and Confined Space Entry Log", "Gas Testing Records and Emergency Response Procedures", "Equipment Isolation Plan and Personal Protective Equipment List", "Hazard Analysis Checklist and Communication Protocol"] },
+        { q: "What are the ONLY acceptable isolation methods for confined space entry?", a: 2, o: ["Double block and bleed with locked valve configuration", "Lockout/tagout with verified energy control procedures", "Blinding or physical disconnection from energy sources", "Physical barriers with posted warning signs and locks"] },
+        { q: "For equipment opening permits involving flammable liquids, what distance requirement applies to ignition sources?", a: 1, o: ["15 meters (50 feet) radius with continuous monitoring", "23 meters (75 feet) removal from opening point", "30 meters (100 feet) clearance in all directions", "46 meters (150 feet) safety zone with barriers"] },
+        { q: "Which section of the work permit addresses atmospheric monitoring requirements?", a: 2, o: ["Section 1 - Work Description", "Section 2 - Hazard Identification & Control", "Section 3 - Gas Testing/Monitoring", "Section 4 - Permit Authorization & Closure"] },
+        { q: "Who must complete and sign Section 3 'Gas Testing/Monitoring'?", a: 3, o: ["Any qualified SA employee with monitoring experience", "The Work Permit Issuer or Designated Representative", "The Confined Space Entry Supervisor when applicable", "A certified gas tester with proper credentials and authorization"] },
+        { q: "When is gas testing required beyond the initial pre-work testing?", a: 0, o: ["If the work permit is renewed for additional time periods", "When weather conditions change significantly during work", "If new personnel join the work crew during execution", "When equipment modifications are made during work activities"] },
+        { q: "What signatures are required in Section 4 'Permit Authorization & Closure' for permit activation?", a: 1, o: ["The safety supervisor and facility operations manager", "The issuer and receiver plus any additional required approvals", "The division head and emergency response coordinator", "The contractor representative and SA oversight manager"] },
+        { q: "For which permits is a joint site inspection mandatory without exception?", a: 2, o: ["Only confined space entry and hot work permits", "Equipment opening and line break permits exclusively", "All work permits regardless of type or complexity", "High-risk permits as determined by the issuer"] },
+        { q: "During joint site inspections, what atmospheric testing standards must be followed?", a: 3, o: ["Basic oxygen and combustible gas measurements only", "Hydrogen sulfide monitoring if deemed necessary by issuer", "Comprehensive air quality analysis by certified laboratory", "Testing per GI 2.100 and GI 2.709 with recorded, signed results"] },
+        { q: "Who must sign the Hazard Analysis Checklist to verify its completion?", a: 0, o: ["Both the issuer (or designated representative) and the receiver", "The work crew supervisor and safety representative", "The facility manager and contractor's project leader", "All personnel involved in the work activity execution"] },
+        { q: "How many assessment questions are included in the standard Hazard Analysis Checklist?", a: 1, o: ["15 standardized safety assessment questions", "20 detailed safety verification questions", "25 comprehensive hazard evaluation items", "30 complete risk assessment criteria"] },
+        { q: "When a Hazard Analysis Checklist question receives a 'NO' response, what action is required?", a: 2, o: ["Work crew must receive additional safety training", "Permit must be escalated to division head approval", "Issuer and receiver must analyze hazards and develop control methods", "Alternative work methods must be documented and approved"] },
+        { q: "What type of equipment must be used for atmospheric gas testing?", a: 3, o: ["Any commercially available gas detection instruments", "Equipment certified by international safety standards only", "Instruments provided exclusively by SA-approved vendors", "Saudi Aramco approved gas monitoring equipment per GI 2.709"] },
+        { q: "Where is atmospheric gas testing required according to the work permit system?", a: 0, o: ["Locations where injury to personnel or property damage could occur from hazardous atmosphere", "Any work area involving mechanical equipment or electrical systems", "All areas where contractor personnel will be working", "Multiple work crew operation zones regardless of hazard potential"] },
+        { q: "For which specific activities is oxygen (O₂) testing mandatory?", a: 1, o: ["All hot work and equipment opening operations", "All confined space entry activities and oxygen deficient/enriched areas", "Any work in areas with potential ventilation issues", "Work involving respiratory protection or breathing apparatus"] },
+        { q: "What oxygen percentage defines an oxygen deficient atmosphere requiring special precautions?", a: 2, o: ["Below 18.0% oxygen concentration", "Less than 19.0% oxygen content", "Less than 20.0% oxygen concentration", "Below 19.5% oxygen levels"] },
+        { q: "When is combustible gas testing (LEL) required under the work permit system?", a: 3, o: ["Only when flammable materials are visibly present", "Hot work activities and equipment maintenance only", "Any work performed by contractor personnel", "All confined space entry, hot work in restricted areas, and areas where combustible gases may be present"] },
+        { q: "What does a reading of 0% LEL indicate in atmospheric testing?", a: 0, o: ["A combustible gas-free atmosphere suitable for work", "The minimum detectable gas concentration level", "A safe working environment for all activities", "The calibration baseline for monitoring equipment"] },
+        { q: "Where is hydrogen sulfide (H₂S) gas testing required?", a: 1, o: ["Any area with petroleum processing equipment", "Areas where sour crude/gas is produced, transported, stored, or processed", "Maintenance work on all pressurized systems", "All confined spaces regardless of previous contents"] },
+        { q: "Who is authorized to perform gas tests in support of work permit activities?", a: 2, o: ["Any SA employee with basic safety training", "Certified technicians from approved contractor companies", "Only personnel with valid gas testing certificates from SA Training & Development", "Work permit issuers and designated representatives exclusively"] },
+        { q: "What is the recertification requirement for gas testing personnel?", a: 3, o: ["Annually with updated safety training", "Every 18 months with competency testing", "Every three years with comprehensive evaluation", "Every two years with proper testing and training"] },
+        { q: "At what combustible gas concentration is hot work strictly prohibited?", a: 0, o: ["Any reading above 0% LEL", "Concentrations above 5% LEL", "Readings of 10% LEL or higher", "When LEL exceeds 15% concentration"] },
+        { q: "What safety measure is required when combustible gases read between 5% LEL and 10% LEL?", a: 1, o: ["Enhanced ventilation and continuous monitoring", "Breathing apparatus must be used by all personnel", "Work may proceed with fire watch and extinguishers", "Hot work is prohibited but cold work may continue"] },
+        { q: "At what H₂S concentration must breathing apparatus be used?", a: 2, o: ["Any detectable level above 0 ppm", "Concentrations of 5 ppm or higher", "10 ppm or above", "When levels reach 25 ppm"] },
+        { q: "H₂S concentrations between 10 ppm and 100 ppm require what additional approval?", a: 3, o: ["Safety department supervisor signature", "Emergency response team notification", "Continuous atmospheric monitoring", "Division head must sign the permit"] },
+        { q: "At what H₂S concentration is work or confined space entry completely prohibited?", a: 1, o: ["50 ppm or above", "100 ppm or above", "150 ppm or higher", "200 ppm concentration"] },
+        { q: "For oxygen levels less than 20.0%, what dual requirements must be satisfied?", a: 0, o: ["Breathing apparatus must be used AND division head must sign permit", "Enhanced ventilation AND continuous monitoring required", "Work stoppage AND atmospheric improvement before proceeding", "Emergency response standby AND respiratory protection training"] },
+        { q: "At what oxygen percentage is work completely prohibited?", a: 2, o: ["Below 19.5% oxygen concentration", "Less than 20.0% oxygen content", "Above 23.5% oxygen levels (oxygen enriched)", "When oxygen exceeds 25% concentration"] },
+        { q: "For Carbon Monoxide (CO) levels between 35 ppm and 1,000 ppm, what is required?", a: 1, o: ["Enhanced ventilation with continuous monitoring", "Breathing apparatus must be used", "Work may proceed with regular air monitoring", "Fire watch and emergency response standby required"] },
+        { q: "At what CO concentration is confined space entry prohibited?", a: 3, o: ["500 ppm or above", "750 ppm concentration", "850 ppm levels", "1,000 ppm or above"] },
+        { q: "What is the normal duration for which work permits are issued?", a: 0, o: ["A single operating shift (issuer's shift)", "8 hours maximum regardless of shift length", "12 hours with possible extension", "24 hours with mandatory renewal requirements"] },
+        { q: "What is the maximum total duration for renewed work permits?", a: 1, o: ["16 hours total time", "24 hours maximum", "36 hours with approval", "48 hours under special circumstances"] },
+        { q: "A renewed work permit requires signatures from which parties?", a: 2, o: ["Original issuer and receiver plus safety supervisor", "Current shift supervisor and facility manager", "Both issuer and receiver coming on shift", "Division head and emergency response coordinator"] },
+        { q: "What is the maximum duration for extended work permits?", a: 3, o: ["7 days for routine maintenance", "14 days for construction projects", "21 days with division head approval", "30 days maximum duration"] },
+        { q: "Who must authorize extended work permits by signature?", a: 1, o: ["Facility operations manager and safety supervisor", "Division head or above of issuing and receiving organizations", "Project manager and contractor representative", "SA senior management and regulatory compliance officer"] },
+        { q: "When must work permits be immediately cancelled according to the system?", a: 0, o: ["When work activities or site conditions change creating additional hazards", "If equipment delivery delays occur beyond 4 hours", "When shift changes require personnel modifications", "If weather conditions become uncomfortable for workers"] },
+        { q: "Who determines which work permits to cancel during emergency conditions?", a: 2, o: ["The senior Work Permit Issuer on duty", "The facility emergency response coordinator", "The Incident Commander at the emergency scene", "The division head or designated safety representative"] },
+        { q: "How are work permits properly closed according to procedure?", a: 3, o: ["The work crew supervisor and facility manager sign", "The safety representative and project coordinator sign", "The original issuer and the initial receiver sign", "Both the issuer and receiver sign after joint inspection"] },
+        { q: "Cold work is specifically defined as activities that will NOT produce sufficient energy to ignite what?", a: 1, o: ["Any combustible substances in the work area", "Flammable atmospheres or combustible materials", "Hydrocarbon vapors or chemical compounds", "Pressurized gases or volatile liquids"] },
+        { q: "Which activity represents a typical example of cold work?", a: 0, o: ["Removing or disturbing asbestos-containing material (ACM)", "Using pneumatic tools for equipment disassembly", "Applying heat guns for paint removal processes", "Operating battery-powered cutting equipment"] },
+        { q: "Even cold work activities may require which safety evaluations?", a: 2, o: ["Basic hazard identification and crew briefing", "Standard safety procedures and equipment inspection", "Joint site inspection and atmospheric gas tests", "Emergency response planning and communication protocols"] },
+        { q: "Hot work is defined as activities that may develop what sufficient for ignition?", a: 3, o: ["Electrical energy or mechanical friction forces", "Chemical reactions or pressure release energy", "Heat transfer or energy concentration effects", "Sparks, flames, or heat sufficient to cause ignition"] },
+        { q: "Which represents a clear example of hot work requiring a permit?", a: 1, o: ["Using hand tools for mechanical assembly work", "Spark-producing tools or abrasive blasting equipment", "Applying adhesives or sealants to surfaces", "Operating hydraulic equipment for lifting operations"] },
+        { q: "When performing hot work in hydrocarbon facilities, sewers and drains within what distance must be covered?", a: 0, o: ["23 meters (75 feet) from ignition sources", "30 meters (100 feet) in all directions", "15 meters (50 feet) from the work area", "46 meters (150 feet) for additional safety margin"] },
+        { q: "For hot work involving cutting, welding, or open flame, how long must fire watch remain after completion?", a: 2, o: ["15 minutes minimum after work completion", "20 minutes with equipment inspection", "No less than 30 minutes after completion", "1 hour with area inspection and documentation"] },
+        { q: "Equipment Opening/Line Break permits are required for opening systems containing which materials?", a: 3, o: ["Any pressurized fluids or gases", "Maintenance-related chemicals or lubricants", "Process fluids regardless of hazard classification", "Flammable, combustible, toxic, or injurious materials"] },
+        { q: "Prior to equipment opening/line break, what must be controlled according to GI 6.012?", a: 1, o: ["Work crew assignments and safety briefings", "Energy sources with proper isolation procedures", "Environmental conditions and weather factors", "Emergency response resources and communication"] },
+        { q: "When opening equipment in flammable service, ignition sources must be removed within what distance?", a: 0, o: ["23 meters (75 feet) from the point of opening", "30 meters (100 feet) in all directions", "15 meters (50 feet) with fire watch required", "46 meters (150 feet) for safety assurance"] },
+        { q: "When unbolting flange connections, bolts must be loosened to create cracking at which position?", a: 2, o: ["12 o'clock position (top) for visibility", "3 o'clock position (side) for access", "5 o'clock position (down and away from worker)", "9 o'clock position (side) for drainage"] },
+        { q: "For H₂S-containing systems, what respiratory protection is required during initial opening?", a: 3, o: ["Personal H₂S monitors with escape respirator", "Supplied air with emergency escape capability", "Full-face respirator with appropriate cartridges", "SCBA or air-line respirator equipment"] },
+        { q: "When H₂S levels are at or above 10 ppm, what work practice is mandatory?", a: 1, o: ["Enhanced atmospheric monitoring frequency", "Use of the buddy system", "Continuous respiratory protection", "Emergency response team standby"] },
+        { q: "Confined space entry is defined as entrance of any part of the body into spaces meeting what criteria?", a: 0, o: ["Specific confined space classification criteria", "Areas requiring special access equipment", "Spaces with limited visibility or lighting", "Locations designated as high-risk by management"] },
+        { q: "A confined space has limited entry/exit means AND is not designed for what?", a: 2, o: ["Extended work periods or tool storage", "Equipment installation or maintenance access", "Human occupancy", "Vehicle or machinery operation"] },
+        { q: "Structures or excavations of what depth are automatically considered confined spaces?", a: 3, o: ["0.9 meters (3 feet) deep or deeper", "1.0 meter (3.3 feet) or deeper", "1.5 meters (5 feet) deep or deeper", "1.2 meters (4 feet) deep or deeper"] },
+        { q: "Each confined space entry requires designation of what supervisory position?", a: 1, o: ["A confined space safety coordinator", "A confined space entry supervisor (CSES)", "A confined space atmospheric monitor", "A confined space emergency response leader"] },
+        { q: "The confined space entry standby man shall maintain what documentation?", a: 0, o: ["Confined space entry log and continuous count of entrants", "Gas testing records and atmospheric monitoring data", "Equipment inspection reports and safety compliance", "Emergency response procedures and evacuation routes"] },
+        { q: "Can the designated confined space entry standby man enter the confined space?", a: 2, o: ["Yes, if equipped with proper safety equipment", "Yes, during emergency rescue situations only", "Never attempt entry into the confined space", "Yes, when relieved by another qualified standby"] },
+        { q: "For confined space entry, what isolation methods are acceptable for process piping?", a: 3, o: ["Double block and bleed with locked valves", "Lockout/tagout with energy verification", "Single valve closure with lock and tag", "Blinding or disconnection only"] },
+        { q: "Before confined space entry gas testing, mechanical ventilation must be shut down for how long?", a: 1, o: ["10 minutes minimum before testing", "At least 15 minutes prior to test", "20 minutes to ensure accurate readings", "30 minutes for complete atmosphere settling"] },
+        { q: "If personnel may fall more than what distance in confined space, fall protection is required?", a: 0, o: ["1.8 meters (6 feet)", "2.0 meters (6.5 feet)", "2.5 meters (8 feet)", "3.0 meters (10 feet)"] }
+    ];
+
+    let currentQuestions = [];
+    let userAnswers = {};
+    let currentQuestionIndex = 0;
+
+    const startContainer = document.getElementById('start-container');
+    const testContainer = document.getElementById('test-container');
+    const resultsContainer = document.getElementById('results-container');
+    const reviewContainer = document.getElementById('review-container');
+
+    const startBtn = document.getElementById('start-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const resetProgressBtn = document.getElementById('reset-progress');
+
+    const questionContainer = document.getElementById('question-container');
+    const progressIndicator = document.getElementById('progress-indicator');
+
+    // --- Event Listeners ---
+    startBtn.addEventListener('click', startTest);
+    submitBtn.addEventListener('click', submitTest);
+    prevBtn.addEventListener('click', showPreviousQuestion);
+    nextBtn.addEventListener('click', showNextQuestion);
+    resetProgressBtn.addEventListener('click', () => {
+        if(confirm("Are you sure you want to reset all your progress? This will clear the history of questions you have answered.")) {
+            localStorage.removeItem('wprUsedQuestionIndices');
+            alert("✅ Progress has been reset successfully!");
+        }
+    });
+    document.addEventListener('keydown', handleKeyPress);
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function startTest() {
+        startContainer.classList.add('hidden');
+        resultsContainer.innerHTML = '';
+        resultsContainer.classList.add('hidden');
+        reviewContainer.innerHTML = '';
+        reviewContainer.classList.add('hidden');
+        testContainer.classList.remove('hidden');
+
+        userAnswers = {};
+        currentQuestionIndex = 0;
+
+        // --- INTELLIGENT QUESTION SELECTION ---
+        let usedIndices = JSON.parse(localStorage.getItem('wprUsedQuestionIndices')) || [];
+        let availableQuestions = questionBank
+            .map((q, index) => ({ ...q, originalIndex: index })) // Add original index
+            .filter(q => !usedIndices.includes(q.originalIndex));
+
+        // If user has seen almost all questions, reset progress.
+        if (availableQuestions.length < 50) {
+            alert("🎉 Congratulations! You have completed the entire question bank. Your progress will now be reset for a fresh start.");
+            usedIndices = [];
+            localStorage.removeItem('wprUsedQuestionIndices');
+            availableQuestions = questionBank.map((q, index) => ({ ...q, originalIndex: index }));
+        }
+
+        shuffleArray(availableQuestions);
+        currentQuestions = availableQuestions.slice(0, 50);
+
+        // Save the new set of questions as used
+        const newUsedIndices = currentQuestions.map(q => q.originalIndex);
+        localStorage.setItem('wprUsedQuestionIndices', JSON.stringify([...usedIndices, ...newUsedIndices]));
+
+        displayQuestion(currentQuestionIndex);
+    }
+
+    function displayQuestion(index) {
+        questionContainer.innerHTML = '';
+        const q = currentQuestions[index];
+
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question fade-in';
+        const questionText = document.createElement('p');
+        questionText.textContent = q.q;
+        questionDiv.appendChild(questionText);
+        const optionsList = document.createElement('ul');
+        optionsList.className = 'options';
+
+        q.o.forEach((optionText, optionIndex) => {
+            const optionItem = document.createElement('li');
+            optionItem.dataset.index = optionIndex;
+            optionItem.textContent = optionText;
+            if (userAnswers[index] !== undefined && parseInt(userAnswers[index]) === optionIndex) {
+                optionItem.classList.add('selected');
+            }
+            optionItem.addEventListener('click', () => selectOption(optionItem));
+            optionsList.appendChild(optionItem);
+        });
+
+        questionDiv.appendChild(optionsList);
+        questionContainer.appendChild(questionDiv);
+        updateNavigation();
+    }
+
+    function selectOption(optionElement) {
+        const siblings = optionElement.parentElement.children;
+        for (let sibling of siblings) {
+            sibling.classList.remove('selected');
+        }
+        optionElement.classList.add('selected');
+        userAnswers[currentQuestionIndex] = optionElement.dataset.index;
+    }
+
+    function updateNavigation() {
+        progressIndicator.textContent = `📍 Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+        prevBtn.disabled = (currentQuestionIndex === 0);
+
+        if (currentQuestionIndex === currentQuestions.length - 1) {
+            nextBtn.classList.add('hidden');
+            submitBtn.classList.remove('hidden');
+        } else {
+            nextBtn.classList.remove('hidden');
+            submitBtn.classList.add('hidden');
+        }
+    }
+
+    function showNextQuestion() {
+        if (currentQuestionIndex < currentQuestions.length - 1) {
+            currentQuestionIndex++;
+            displayQuestion(currentQuestionIndex);
+        }
+    }
+
+    function showPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayQuestion(currentQuestionIndex);
+        }
+    }
+
+    function submitTest() {
+        const unansweredCount = currentQuestions.filter((q, index) => userAnswers[index] === undefined).length;
+        if (unansweredCount > 0) {
+            if (!confirm(`⚠️ You have not answered ${unansweredCount} question(s). Are you sure you want to submit?`)) {
+                return;
+            }
+        }
+
+        let score = 0;
+        currentQuestions.forEach((q, index) => {
+            if (userAnswers[index] !== undefined && parseInt(userAnswers[index]) === q.a) {
+                score++;
+            }
+        });
+
+        const percentage = Math.round((score / currentQuestions.length) * 100);
+        showResultsPage(score, percentage);
+    }
+
+    function showResultsPage(score, percentage) {
+        testContainer.classList.add('hidden');
+        const passStatus = percentage >= 80;
+        const emoji = passStatus ? '🎉' : '📚';
+        const resultMessage = passStatus ? 'Congratulations, you passed!' : 'Keep studying and try again!';
+
+        // Count wrong answers
+        const wrongCount = currentQuestions.filter((q, index) => {
+            const userAnswerIndex = userAnswers[index] !== undefined ? parseInt(userAnswers[index]) : -1;
+            return userAnswerIndex !== q.a;
+        }).length;
+
+        resultsContainer.innerHTML = `
+            <h2>${emoji} Test Complete</h2>
+            <div id="score-display" class="score ${passStatus ? 'pass' : 'fail'}">${percentage}%</div>
+            <p id="result-message">
+                <strong>${resultMessage}</strong><br>
+                The required passing score is <strong>80%</strong>.<br>
+                You answered <strong>${score} out of 50</strong> questions correctly.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <button id="review-btn-results" class="btn">📖 Review All Answers</button>
+                ${wrongCount > 0 ? `<button id="wrong-answers-btn" class="btn" style="background: linear-gradient(135deg, var(--danger-color), #e74c3c);">❌ Review Wrong Answers (${wrongCount})</button>` : ''}
+                <button id="retake-btn-results" class="btn secondary">🔄 Take a New Test</button>
+            </div>
+        `;
+        resultsContainer.classList.remove('hidden');
+
+        document.getElementById('review-btn-results').addEventListener('click', showReviewPage);
+        if (wrongCount > 0) {
+            document.getElementById('wrong-answers-btn').addEventListener('click', showWrongAnswersOnly);
+        }
+        document.getElementById('retake-btn-results').addEventListener('click', startTest);
+    }
+
+    function showReviewPage() {
+        resultsContainer.classList.add('hidden');
+        reviewContainer.innerHTML = '<h2>📋 Test Review</h2>';
+
+        currentQuestions.forEach((q, index) => {
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'review-question fade-in';
+            const questionText = document.createElement('p');
+            questionText.textContent = `${index + 1}. ${q.q}`;
+            reviewDiv.appendChild(questionText);
+            const optionsList = document.createElement('ul');
+            optionsList.className = 'options review-options';
+
+            const userAnswerIndex = userAnswers[index] !== undefined ? parseInt(userAnswers[index]) : -1;
+            const correctAnswerIndex = q.a;
+
+            q.o.forEach((option, optionIndex) => {
+                const optionItem = document.createElement('li');
+                optionItem.textContent = option;
+                if (optionIndex === correctAnswerIndex) optionItem.classList.add('correct-answer');
+                if (optionIndex === userAnswerIndex) {
+                    optionItem.classList.add('user-selected');
+                    if (userAnswerIndex !== correctAnswerIndex) optionItem.classList.add('incorrect-answer');
+                }
+                optionsList.appendChild(optionItem);
+            });
+
+            if (userAnswerIndex === -1) {
+                const unansweredText = document.createElement('p');
+                unansweredText.textContent = "⚠️ You did not answer this question.";
+                unansweredText.style.color = 'var(--danger-color)';
+                unansweredText.style.fontWeight = 'bold';
+                unansweredText.style.textAlign = 'center';
+                unansweredText.style.padding = '10px';
+                unansweredText.style.backgroundColor = '#fff3cd';
+                unansweredText.style.border = '1px solid #ffeaa7';
+                unansweredText.style.borderRadius = 'var(--border-radius-small)';
+                reviewDiv.appendChild(unansweredText);
+            }
+
+            reviewDiv.appendChild(optionsList);
+            reviewContainer.appendChild(reviewDiv);
+        });
+
+        const retakeTestBtn = document.createElement('button');
+        retakeTestBtn.textContent = '🚀 Take a New Test';
+        retakeTestBtn.className = 'btn success';
+        retakeTestBtn.style.width = '100%';
+        retakeTestBtn.style.marginTop = '30px';
+        retakeTestBtn.onclick = startTest;
+        reviewContainer.appendChild(retakeTestBtn);
+        reviewContainer.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    function showWrongAnswersOnly() {
+        resultsContainer.classList.add('hidden');
+        reviewContainer.innerHTML = '<h2>❌ Wrong Answers Review</h2>';
+
+        // Add explanation header
+        const explanationDiv = document.createElement('div');
+        explanationDiv.style.cssText = `
+            background: linear-gradient(135deg, #fff5f5, #fed7d7);
+            border: 2px solid #fc8181;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        `;
+        explanationDiv.innerHTML = `
+            <h3 style="color: var(--danger-color); margin-top: 0;">📚 Study Focus Mode</h3>
+            <p style="margin-bottom: 0;">This section shows only the questions you answered incorrectly or left blank. Study these to improve your knowledge!</p>
+        `;
+        reviewContainer.appendChild(explanationDiv);
+
+        let wrongQuestionNumber = 1;
+        currentQuestions.forEach((q, index) => {
+            const userAnswerIndex = userAnswers[index] !== undefined ? parseInt(userAnswers[index]) : -1;
+            const correctAnswerIndex = q.a;
+
+            // Only show questions that were answered incorrectly or not answered
+            if (userAnswerIndex !== correctAnswerIndex) {
+                const reviewDiv = document.createElement('div');
+                reviewDiv.className = 'review-question fade-in';
+                reviewDiv.style.border = '2px solid var(--danger-color)';
+                reviewDiv.style.backgroundColor = '#fff5f5';
+
+                const questionText = document.createElement('p');
+                questionText.textContent = `${wrongQuestionNumber}. ${q.q}`;
+                questionText.style.color = 'var(--danger-color)';
+                reviewDiv.appendChild(questionText);
+
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'options review-options';
+
+                q.o.forEach((option, optionIndex) => {
+                    const optionItem = document.createElement('li');
+                    optionItem.textContent = option;
+
+                    if (optionIndex === correctAnswerIndex) {
+                        optionItem.classList.add('correct-answer');
+                        // Make correct answer more prominent
+                        optionItem.style.fontWeight = 'bold';
+                        optionItem.style.boxShadow = '0 2px 8px rgba(40, 167, 69, 0.3)';
+                    }
+
+                    if (optionIndex === userAnswerIndex) {
+                        optionItem.classList.add('user-selected');
+                        if (userAnswerIndex !== correctAnswerIndex) {
+                            optionItem.classList.add('incorrect-answer');
+                            optionItem.style.fontWeight = 'bold';
+                        }
+                    }
+
+                    optionsList.appendChild(optionItem);
+                });
+
+                if (userAnswerIndex === -1) {
+                    const unansweredText = document.createElement('p');
+                    unansweredText.textContent = "⚠️ You did not answer this question.";
+                    unansweredText.style.cssText = `
+                        color: var(--danger-color);
+                        font-weight: bold;
+                        text-align: center;
+                        padding: 15px;
+                        background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+                        border: 2px solid #ffc107;
+                        border-radius: var(--border-radius-small);
+                        margin: 15px 0;
+                    `;
+                    reviewDiv.appendChild(unansweredText);
+                }
+
+                // Add correct answer explanation
+                const correctAnswerExplanation = document.createElement('div');
+                correctAnswerExplanation.style.cssText = `
+                    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+                    border: 2px solid var(--success-color);
+                    border-radius: var(--border-radius-small);
+                    padding: 15px;
+                    margin-top: 15px;
+                `;
+                correctAnswerExplanation.innerHTML = `
+                    <strong style="color: var(--success-color);">✅ Correct Answer:</strong><br>
+                    <span style="font-weight: 600; color: #155724;">${q.o[correctAnswerIndex]}</span>
+                `;
+                reviewDiv.appendChild(correctAnswerExplanation);
+
+                reviewDiv.appendChild(optionsList);
+                reviewContainer.appendChild(reviewDiv);
+                wrongQuestionNumber++;
+            }
+        });
+
+        // Add navigation buttons
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.cssText = `
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        `;
+
+        const backToResultsBtn = document.createElement('button');
+        backToResultsBtn.textContent = '📊 Back to Results';
+        backToResultsBtn.className = 'btn secondary';
+        backToResultsBtn.onclick = () => {
+            reviewContainer.classList.add('hidden');
+            resultsContainer.classList.remove('hidden');
+        };
+
+        const retakeTestBtn = document.createElement('button');
+        retakeTestBtn.textContent = '🚀 Take a New Test';
+        retakeTestBtn.className = 'btn success';
+        retakeTestBtn.onclick = startTest;
+
+        buttonContainer.appendChild(backToResultsBtn);
+        buttonContainer.appendChild(retakeTestBtn);
+        reviewContainer.appendChild(buttonContainer);
+
+        reviewContainer.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    function handleKeyPress(e) {
+        if (testContainer.classList.contains('hidden')) return;
+        if (e.key === 'Enter') { 
+            e.preventDefault(); 
+            if (!submitBtn.classList.contains('hidden')) {
+                submitBtn.click();
+            } else if (!nextBtn.disabled) {
+                nextBtn.click();
+            }
+        }
+        if (e.key === 'ArrowRight' && !nextBtn.disabled) { e.preventDefault(); nextBtn.click(); }
+        if (e.key === 'ArrowLeft' && !prevBtn.disabled) { e.preventDefault(); prevBtn.click(); }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); navigateOptions(e.key); }
+    }
+
+    function navigateOptions(key) {
+        const options = Array.from(questionContainer.querySelectorAll('.options li'));
+        if (options.length === 0) return;
+        const currentSelectedIndex = options.findIndex(opt => opt.classList.contains('selected'));
+        let nextIndex = currentSelectedIndex;
+
+        if (key === 'ArrowDown') nextIndex = currentSelectedIndex + 1 >= options.length ? 0 : currentSelectedIndex + 1;
+        else if (key === 'ArrowUp') nextIndex = currentSelectedIndex - 1 < 0 ? options.length - 1 : currentSelectedIndex - 1;
+
+        if (currentSelectedIndex === -1) nextIndex = key === 'ArrowUp' ? options.length - 1 : 0;
+        selectOption(options[nextIndex]);
+    }
+});
+</script>
+
+</body>
+</html>
